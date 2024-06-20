@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-size: 62.5%;
+  }
+
+  body {
+    font-size: 1.4rem;
+    font-weight: 400;
+  }
+
+  input {
+    outline: none;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #4d5256;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+  }
+
+  .scroll-block::-webkit-scrollbar {
+    display: block;
+    height: 6px;
+    width: 6px;
+  }
+
+  .scroll-block::-webkit-scrollbar-thumb {
+    background-color: #3182f6;
+    border-radius: 8px;
+  }
+
+  .scroll-block::-webkit-scrollbar-track {
+    background: #f2f6fe;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  :root {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    cursor: default;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    -moz-tab-size: 4;
+    tab-size: 4;
+  }
+}
+
+.gongbang-image {
+  background-image: url('../assets/intro-back-image.svg');
+  background-size: cover;
+  background-position: center;
+}
