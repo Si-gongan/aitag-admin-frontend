@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={inter.className}>
-      <body className="flex flex-col items-center w-full mt-123 mb-40">{children}</body>
+      <body className="flex flex-col items-center w-full my-120">{children}</body>
     </html>
   );
 }

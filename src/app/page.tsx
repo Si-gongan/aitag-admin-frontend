@@ -1,3 +1,4 @@
+import Pagination from '@/components/common/Pagination';
 import ListSection from '@/components/main/ListSection';
 import SortButtons from '@/components/main/SortButtons';
 import { getData } from '@/services/main';
@@ -11,6 +12,7 @@ export default async function Home() {
       <main className="flex flex-col gap-61">
         <SortButtons />
         <ListSection data={data.data} />
+        <Pagination page={6} totalPages={12} />
       </main>
     </div>
   );
