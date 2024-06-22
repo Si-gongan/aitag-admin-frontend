@@ -11,7 +11,7 @@ export default async function Home() {
       <header className="text-36 font-semibold text-black">A;tag Admin Page</header>
       <main className="flex flex-col gap-61">
         <SortButtons />
-        <ListSection data={data.data} />
+        <ListSection listData={data.data} />
         <Pagination page={6} totalPages={12} />
       </main>
     </div>
