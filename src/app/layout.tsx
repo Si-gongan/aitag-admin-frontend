@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Inter } from 'next/font/google';
+import { MainStoreProvider } from '@/providers/main-store-provider';
 
 export const metadata: Metadata = {
   title: '에이택 어드민',
@@ -19,7 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={inter.className}>
-      <body className="flex flex-col items-center w-full my-120">{children}</body>
+      <body className="flex flex-col items-center w-full my-120">
+        <MainStoreProvider>{children}</MainStoreProvider>
+      </body>
     </html>
   );
 }

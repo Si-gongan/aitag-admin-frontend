@@ -1,3 +1,5 @@
+'use client';
+
 import { DataType } from '@/services/main/schema';
 import { formattedDate } from '@/utils/formattedDate';
 import Image from 'next/image';
