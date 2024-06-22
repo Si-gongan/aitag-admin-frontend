@@ -1,9 +1,9 @@
 /**의뢰 목록조회 요청 params */
+export type TargetType = 'all' | 'comment' | 'ai' | 'inspect';
 export type StateType = 'all' | 'pending' | 'done';
 
 export interface getDataParamsType {
-  target: 'all' | 'comment' | 'ai' | 'inspect';
-  // state: 'all' | 'pending' | 'done';
+  target: TargetType;
   state: StateType;
   search?: string;
   limit?: string;

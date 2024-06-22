@@ -1,24 +1,29 @@
 'use client';
 
-import { useDataStore } from '@/providers/data-store-provider';
+import { useMainStore } from '@/providers/main-store-provider';
 import { getData } from '@/services/main';
 import { StateType } from '@/services/main/schema';
 import { SORT_BUTTONS } from '@/utils/constants';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
 export default function SortButtons() {
-  const { state, setState, page, setDatas } = useDataStore((state) => state);
+  const { state, setState, setPage, setDatas, setTotalPages } = useMainStore((state) => state);
 
   const fetchPageData = useCallback(async () => {
-    const response = await getData({ target: 'all', state: state as StateType, page: String(page) });
+    const response = await getData({ target: 'all', state: state as StateType });
 
+    setTotalPages(response.totalPages);
     setDatas(response.data);
-  }, [page, setDatas, state]);
+  }, [setDatas, state, setTotalPages]);
 
   const handleChangeState = (sortId: string) => {
     setState(sortId);
-    fetchPageData();
+    setPage(1);
   };
+
+  useEffect(() => {
+    fetchPageData();
+  }, [state, fetchPageData]);
 
   return (
     <div className="flex items-center gap-40">

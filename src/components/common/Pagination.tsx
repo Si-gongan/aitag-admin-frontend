@@ -1,6 +1,6 @@
 'use client';
 
-import { useDataStore } from '@/providers/data-store-provider';
+import { useMainStore } from '@/providers/main-store-provider';
 import { getData } from '@/services/main';
 import { StateType } from '@/services/main/schema';
 import Image from 'next/image';
@@ -11,7 +11,7 @@ interface PaginationProps {
 }
 
 export default function Pagination({ initTotalPages }: PaginationProps) {
-  const { page, setPage, totalPages, setTotalPages, setDatas, state } = useDataStore((state) => state);
+  const { page, setPage, totalPages, setTotalPages, setDatas, state } = useMainStore((state) => state);
 
   const startPage = Math.floor((page - 1) / 10) * 10 + 1;
   const endPage = Math.min(startPage + 9, totalPages);
@@ -27,9 +27,7 @@ export default function Pagination({ initTotalPages }: PaginationProps) {
   }, [state, setDatas, page]);
 
   const handlePrev = () => {
-    const newPage = startPage - 1;
-
-    setPage(newPage);
+    setPage(startPage - 1);
   };
 
   const handleClick = (num: number) => {
@@ -37,9 +35,7 @@ export default function Pagination({ initTotalPages }: PaginationProps) {
   };
 
   const handleNext = () => {
-    const newPage = endPage + 1;
-
-    setPage(newPage);
+    setPage(endPage + 1);
   };
 
   useEffect(() => {

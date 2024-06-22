@@ -1,7 +1,7 @@
 import { createStore } from 'zustand/vanilla';
 import { DataType } from '@/services/main/schema';
 
-export type DataStateType = {
+export type MainStateType = {
   datas: DataType[];
   state: string;
   page: number;
@@ -9,7 +9,7 @@ export type DataStateType = {
   search: string;
 };
 
-export type DataActionsType = {
+export type MainActionsType = {
   setDatas: (datas: DataType[]) => void;
   setState: (state: string) => void;
   setPage: (page: number) => void;
@@ -17,9 +17,9 @@ export type DataActionsType = {
   setSearch: (search: string) => void;
 };
 
-export type CreateDataStoreType = DataStateType & DataActionsType;
+export type CreateMainStoreType = MainStateType & MainActionsType;
 
-export const defaultData: DataStateType = {
+export const defaultData: MainStateType = {
   datas: [],
   state: 'all',
   page: 1,
@@ -27,8 +27,8 @@ export const defaultData: DataStateType = {
   search: '',
 };
 
-export const createDataStore = (initState: DataStateType = defaultData) => {
-  return createStore<CreateDataStoreType>()((set) => ({
+export const createMainStore = (initState: MainStateType = defaultData) => {
+  return createStore<CreateMainStoreType>()((set) => ({
     ...initState,
     setDatas: (datas: DataType[]) => set(() => ({ datas })),
     setState: (state: string) => set(() => ({ state })),
