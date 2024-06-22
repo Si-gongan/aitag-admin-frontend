@@ -1,5 +1,5 @@
 import { API_ROUTE } from '@/utils/route';
-import { getDataParamsType } from './scheme';
+import { getDataParamsType } from './schema';
 import { fetcher } from '@/lib/fetcher';
 import { MAIN_DATA_LIMIT } from '@/utils/constants';
 
@@ -9,14 +9,18 @@ export async function getData(params: getDataParamsType) {
 
   requestParams.set('target', params.target);
   requestParams.set('state', params.state);
+  requestParams.set('limit', '14');
   requestParams.set('limit', params.limit || MAIN_DATA_LIMIT);
+  requestParams.set('page', params.page || '1');
 
-  const optionalParams = ['page', 'search'];
-  optionalParams.forEach((param) => {
-    if (params[param]) {
-      requestParams.set(param, params[param] as string);
-    }
-  });
+  if (params.search) requestParams.set('search', params.search);
+
+  // const optionalParams = ['search'];
+  // optionalParams.forEach((param) => {
+  //   if (params[param]) {
+  //     requestParams.set(param, params[param] as string);
+  //   }
+  // });
 
   const requestUrl = `${API_ROUTE.GET_DATA(requestParams.toString())}`;
 

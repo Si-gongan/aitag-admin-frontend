@@ -1,9 +1,7 @@
 /**의뢰 목록조회 요청 params */
 export interface getDataParamsType {
   target: 'comment' | 'ai' | 'inspect';
-  // target: string;
   state: 'all' | 'pending' | 'done';
-  // state: string;
   search?: string;
   limit?: string;
   page?: string;
