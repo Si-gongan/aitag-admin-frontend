@@ -1,7 +1,10 @@
 /**의뢰 목록조회 요청 params */
+export type StateType = 'all' | 'pending' | 'done';
+
 export interface getDataParamsType {
-  target: 'comment' | 'ai' | 'inspect';
-  state: 'all' | 'pending' | 'done';
+  target: 'all' | 'comment' | 'ai' | 'inspect';
+  // state: 'all' | 'pending' | 'done';
+  state: StateType;
   search?: string;
   limit?: string;
   page?: string;

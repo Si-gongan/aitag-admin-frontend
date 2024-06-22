@@ -1,31 +1,54 @@
 'use client';
 
+import { useDataStore } from '@/providers/data-store-provider';
+import { getData } from '@/services/main';
+import { StateType } from '@/services/main/schema';
 import Image from 'next/image';
+import { useCallback, useEffect } from 'react';
 
 interface PaginationProps {
-  page: number;
-  totalPages: number;
+  initTotalPages: number;
 }
 
-export default function Pagination({ page, totalPages }: PaginationProps) {
-  const startPage = Math.ceil(page / 10);
+export default function Pagination({ initTotalPages }: PaginationProps) {
+  const { page, setPage, totalPages, setTotalPages, setDatas, state } = useDataStore((state) => state);
+
+  const startPage = Math.floor((page - 1) / 10) * 10 + 1;
   const endPage = Math.min(startPage + 9, totalPages);
   const prevPage = page > 10;
   const nextPage = startPage * 10 < totalPages;
 
   const pageNumbers = Array.from({ length: endPage - startPage + 1 }, (_, index) => startPage + index);
 
+  const fetchPageData = useCallback(async () => {
+    const response = await getData({ target: 'all', state: state as StateType, page: String(page) });
+
+    setDatas(response.data);
+  }, [state, setDatas, page]);
+
   const handlePrev = () => {
-    console.log('이전페이지로');
+    const newPage = startPage - 1;
+
+    setPage(newPage);
   };
 
   const handleClick = (num: number) => {
-    console.log(num);
+    setPage(num);
   };
 
   const handleNext = () => {
-    console.log('다음페이지로');
+    const newPage = endPage + 1;
+
+    setPage(newPage);
   };
+
+  useEffect(() => {
+    setTotalPages(initTotalPages);
+  }, [initTotalPages, setTotalPages]);
+
+  useEffect(() => {
+    fetchPageData();
+  }, [page, fetchPageData]);
 
   return (
     <div className="flex justify-between items-center w-full">

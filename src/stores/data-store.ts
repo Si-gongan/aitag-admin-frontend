@@ -2,38 +2,38 @@ import { createStore } from 'zustand/vanilla';
 import { DataType } from '@/services/main/schema';
 
 export type DataStateType = {
-  listData: DataType[];
+  datas: DataType[];
   state: string;
   page: number;
-  totalPage: number;
+  totalPages: number;
   search: string;
 };
 
 export type DataActionsType = {
-  setListData: (istData: DataType[]) => void;
+  setDatas: (datas: DataType[]) => void;
   setState: (state: string) => void;
   setPage: (page: number) => void;
-  setTotalPage: (totalPage: number) => void;
+  setTotalPages: (totalPages: number) => void;
   setSearch: (search: string) => void;
 };
 
 export type CreateDataStoreType = DataStateType & DataActionsType;
 
 export const defaultData: DataStateType = {
-  listData: [],
+  datas: [],
   state: 'all',
   page: 1,
-  totalPage: 1,
+  totalPages: 1,
   search: '',
 };
 
 export const createDataStore = (initState: DataStateType = defaultData) => {
   return createStore<CreateDataStoreType>()((set) => ({
     ...initState,
-    setListData: (listData: DataType[]) => set(() => ({ listData })),
+    setDatas: (datas: DataType[]) => set(() => ({ datas })),
     setState: (state: string) => set(() => ({ state })),
     setPage: (page: number) => set(() => ({ page })),
-    setTotalPage: (totalPage: number) => set(() => ({ totalPage })),
+    setTotalPages: (totalPages: number) => set(() => ({ totalPages })),
     setSearch: (search: string) => set(() => ({ search })),
   }));
 };
