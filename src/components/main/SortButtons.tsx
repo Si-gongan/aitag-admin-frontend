@@ -2,40 +2,48 @@
 
 import { useMainStore } from '@/providers/main-store-provider';
 import { getData } from '@/services/main';
-import { StateType } from '@/services/main/schema';
-import { SORT_BUTTONS } from '@/utils/constants';
 import { useCallback, useEffect } from 'react';
+import { StateType, TargetType } from '@/services/main/schema';
+import Button from '../common/Button';
 
-export default function SortButtons() {
-  const { state, setState, setPage, setDatas, setTotalPages } = useMainStore((state) => state);
+interface SortButtonsProps<T> {
+  type: 'state' | 'target';
+  buttons: Array<{ value: T; text: string }>;
+}
 
-  const fetchPageData = useCallback(async () => {
-    const response = await getData({ target: 'all', state: state as StateType });
+export default function SortButtons<T extends StateType | TargetType>({ type, buttons }: SortButtonsProps<T>) {
+  const { state, setState, target, setTarget, setDatas, setPage, setTotalPages } = useMainStore((state) => state);
 
-    setTotalPages(response.totalPages);
+  const currentValue = type === 'state' ? state : target;
+
+  const fetchMainData = useCallback(async () => {
+    const response = await getData({ target, state });
+
     setDatas(response.data);
-  }, [setDatas, state, setTotalPages]);
+    setTotalPages(response.totalPages);
+  }, [setDatas, setTotalPages, state, target]);
 
-  const handleChangeState = (sortId: string) => {
-    setState(sortId);
+  const handleChange = (value: T) => {
     setPage(1);
+
+    if (type === 'state') {
+      setState(value as StateType);
+    } else if (type === 'target') setTarget(value as TargetType);
   };
 
   useEffect(() => {
-    fetchPageData();
-  }, [state, fetchPageData]);
+    fetchMainData();
+  }, [state, target, fetchMainData]);
 
   return (
     <div className="flex items-center gap-40">
-      {SORT_BUTTONS.map((sort) => (
-        <button
-          key={sort.text}
-          onClick={() => handleChangeState(sort.id)}
-          className={`flex items-center justify-center rounded-lg w-108 h-40 text-18 ${
-            sort.id === state ? 'bg-gray-400 text-white' : 'bg-gray-100'
-          }`}>
-          {sort.text}
-        </button>
+      {buttons?.map((button) => (
+        <Button
+          key={button.value}
+          text={button.text}
+          clicked={button.value === currentValue}
+          handleClick={() => handleChange(button.value)}
+        />
       ))}
     </div>
   );
