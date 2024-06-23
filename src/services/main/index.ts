@@ -9,7 +9,6 @@ export async function getData(params: getDataParamsType) {
 
   requestParams.set('target', params.target);
   requestParams.set('state', params.state);
-  requestParams.set('limit', '14');
   requestParams.set('limit', params.limit || MAIN_DATA_LIMIT);
   requestParams.set('page', params.page || '1');
 
