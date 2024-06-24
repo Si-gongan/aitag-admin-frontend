@@ -12,7 +12,7 @@ export default async function PostIdPage({ params }: PostIdPageProps) {
   const { postId } = params;
   const initPostDetail = await getPostDetail(postId);
   const { title, detail = null, works } = initPostDetail;
-  const totalPages = Math.floor(works.length / 6) + 1;
+  const totalPages = Math.floor(works.length / 9) + 1;
 
   return (
     <main className="w-1400 flex flex-col gap-43">
