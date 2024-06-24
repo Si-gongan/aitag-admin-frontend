@@ -1,8 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 
-const rem0_10 = { ...Array.from(Array(11)).map((_, i) => `${i / 10}rem`) };
-const rem0_100 = { ...Array.from(Array(101)).map((_, i) => `${i / 10}rem`) };
-const rem0_2000 = { ...Array.from(Array(2001)).map((_, i) => `${i / 10}rem`) };
+const rem0_10 = Object.fromEntries(Array.from(Array(11), (_, i) => [i, `${i / 10}rem`]));
+const rem0_100 = Object.fromEntries(Array.from(Array(101), (_, i) => [i, `${i / 10}rem`]));
+const rem0_2000 = Object.fromEntries(Array.from(Array(2001), (_, i) => [i, `${i / 10}rem`]));
 
 module.exports = {
   mode: 'jit',

@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={inter.className}>
-      <body className="flex flex-col items-center gap-60 w-full my-120">
+      <body className="flex flex-col items-center gap-26 w-full my-120">
         <Header />
         <MainStoreProvider>{children}</MainStoreProvider>
       </body>

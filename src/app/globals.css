@@ -60,3 +60,15 @@
   background-size: cover;
   background-position: center;
 }
+
+.btn-small {
+  @apply w-65 h-28; /* 적절한 TailwindCSS 유틸리티 클래스를 사용하여 버튼 크기 설정 */
+}
+
+.btn-medium {
+  @apply w-108 h-40;
+}
+
+.btn-large {
+  @apply w-133 h-41;
+}
