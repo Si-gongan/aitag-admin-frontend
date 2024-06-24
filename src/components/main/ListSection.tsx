@@ -4,6 +4,8 @@ import { DataType } from '@/services/main/schema';
 import ListItem from './ListItem';
 import { useMainStore } from '@/providers/main-store-provider';
 import { useEffect } from 'react';
+import Link from 'next/link';
+import { URL_PATH } from '@/utils/route';
 
 interface ListSectionProps {
   data: DataType[];
@@ -22,7 +24,9 @@ export default function ListSection({ data }: ListSectionProps) {
         + 새 의뢰 생성
       </div>
       {datas.map((item) => (
-        <ListItem key={item.id} item={item} />
+        <Link key={item.id} href={URL_PATH.POST_DETAIL(item.id)}>
+          <ListItem item={item} />
+        </Link>
       ))}
     </section>
   );
