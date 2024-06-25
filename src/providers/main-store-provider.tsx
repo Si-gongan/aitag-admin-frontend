@@ -25,7 +25,7 @@ export const useMainStore = <T,>(selector: (store: CreateMainStoreType) => T): T
   const mainStoreContext = useContext(MainStoreContext);
 
   if (!mainStoreContext) {
-    throw new Error(`useMainStore은 반드시 MainStoreProvider 안에서 사용해야 해요!`);
+    throw new Error('useMainStore은 반드시 MainStoreProvider 안에서 사용해야 해요!');
   }
 
   return useStore(mainStoreContext, selector);

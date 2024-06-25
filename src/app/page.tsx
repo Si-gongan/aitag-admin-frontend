@@ -1,5 +1,5 @@
-import Pagination from '@/components/common/Pagination';
 import ListSection from '@/components/main/ListSection';
+import MainPagination from '@/components/main/MainPagination';
 import SortButtons from '@/components/main/SortButtons';
 import { getData } from '@/services/main';
 import { STATE_BUTTONS, TARGET_BUTTONS } from '@/utils/constants';
@@ -15,7 +15,7 @@ export default async function MainPage() {
         <SortButtons type="target" buttons={TARGET_BUTTONS} />
       </section>
       <ListSection data={response.data} />
-      <Pagination initTotalPages={response.totalPages} />
+      <MainPagination initTotalPages={response.totalPages} />
     </main>
   );
 }

@@ -13,6 +13,7 @@ export async function fetcher(endPoint: string, method: string, options?: any) {
       ...defaultHeaders,
       ...options?.headers,
     },
+    cache: 'no-store',
     ...options,
   };
 
