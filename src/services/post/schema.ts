@@ -3,9 +3,11 @@ export type PostTargetType = 'ai' | 'comment';
 export interface WorksType {
   id: string;
   image: string;
-  language: string;
+  language?: string;
   keywords: string[];
   tone: string;
+  before?: string;
+  after?: string;
   answer?: string;
 }
 
@@ -14,7 +16,7 @@ export interface getPostDetailType {
   id: string;
   writer: string;
   title: string;
-  target: PostTargetType;
+  target?: PostTargetType;
   isComplete: boolean;
   works: WorksType[];
   detail?: string;

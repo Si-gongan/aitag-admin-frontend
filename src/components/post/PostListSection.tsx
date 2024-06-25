@@ -13,8 +13,7 @@ export default function PostListSection() {
   return (
     <section className="flex flex-wrap gap-x-46 gap-y-44">
       {indexArray.map(
-        (index) =>
-          post?.works[index] && <PostItem key={post?.works[index].id} work={post?.works[index]} target={post?.target} />
+        (index) => post?.works[index] && <PostItem key={post?.works[index].id} work={post?.works[index]} />
       )}
     </section>
   );

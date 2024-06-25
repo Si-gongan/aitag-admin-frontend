@@ -9,23 +9,27 @@ import { usePostStore } from '@/providers/post-store-provider';
 
 interface PostItemProps {
   work: WorksType;
-  target: PostTargetType;
 }
 
-export default function PostItem({ work, target }: PostItemProps) {
+export default function PostItem({ work }: PostItemProps) {
   const [checked, setChecked] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
+
+  const { post, selectedWorks, addSelectedWork, deleteSelectedWork } = usePostStore((state) => ({
+    post: state.post,
+    selectedWorks: state.selectedWorks,
+    addSelectedWork: state.addSelectedWork,
+    deleteSelectedWork: state.deleteSelectedWork,
+  }));
+
+  const isInspect = post && post.target === undefined;
+  const answerText = isInspect ? work.after || '' : work.answer || '없음';
+  const buttonText = isInspect === undefined ? '작성' : '수정';
 
   const thumbnail =
     typeof work.image === 'string' && work.image.startsWith('https://gongbang-v2')
       ? work.image
       : '/images/default-thumbnail.png';
-
-  const { selectedWorks, addSelectedWork, deleteSelectedWork } = usePostStore((state) => ({
-    selectedWorks: state.selectedWorks,
-    addSelectedWork: state.addSelectedWork,
-    deleteSelectedWork: state.deleteSelectedWork,
-  }));
 
   const handleClick = () => {
     const findSelectedWork = selectedWorks.find((selectedWork) => selectedWork.id === work.id);
@@ -54,8 +58,10 @@ export default function PostItem({ work, target }: PostItemProps) {
         />
       </div>
       <div className="flex flex-col items-end">
-        <p className="w-292 h-48 text-13 leading-16 line-clamp-3">{work.answer ? work.answer : '없음'}</p>
-        {target !== 'ai' && <Button text="수정" size="small" handleClick={() => setEditModalOpen(true)} />}
+        <p className="w-292 h-48 text-13 leading-16 line-clamp-3">{answerText}</p>
+        {post && post.target !== 'ai' && (
+          <Button text={buttonText} size="small" handleClick={() => setEditModalOpen(true)} />
+        )}
       </div>
     </section>
   );
