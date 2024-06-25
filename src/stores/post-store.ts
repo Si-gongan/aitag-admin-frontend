@@ -1,10 +1,11 @@
-import { getPostDetail } from '@/services/post';
+import { getInspectDetail, getPostDetail } from '@/services/post';
 import { WorksType, getPostDetailType } from '@/services/post/schema';
 import { POST_LIST_PAGE_LIMIT } from '@/utils/constants';
 import { createStore } from 'zustand';
 
 export type PostStateType = {
   postId: string;
+  pathname: string;
   post: getPostDetailType | null;
   selectedWorks: WorksType[];
   page: number;
@@ -12,6 +13,7 @@ export type PostStateType = {
 
 export type PostActionsType = {
   setPostId: (postId: string) => void;
+  setPathname: (pathname: string) => void;
   fetchPost: (postId: string) => Promise<void>;
   addSelectedWork: (newWork: WorksType) => void;
   deleteSelectedWork: (workId: string) => void;
@@ -24,6 +26,7 @@ export type CreatePostStoreType = PostStateType & PostActionsType;
 
 export const defaultPost: PostStateType = {
   postId: '',
+  pathname: '',
   post: null,
   selectedWorks: [],
   page: 1,
@@ -33,9 +36,17 @@ export const createPostStore = (initState: PostStateType = defaultPost) => {
   return createStore<CreatePostStoreType>()((set, get) => ({
     ...initState,
     setPostId: (postId: string) => set(() => ({ postId })),
+    setPathname: (pathname: string) => set(() => ({ pathname })),
     fetchPost: async (postId: string) => {
-      const response = await getPostDetail(postId);
-      set({ post: response });
+      const { pathname } = get();
+
+      if (pathname === 'post') {
+        const response = await getPostDetail(postId);
+        set({ post: response });
+      } else if (pathname === 'inspect') {
+        const response = await getInspectDetail(postId);
+        set({ post: response });
+      }
     },
     addSelectedWork: (newWork: WorksType) =>
       set((state) => ({
