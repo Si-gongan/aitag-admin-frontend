@@ -15,6 +15,7 @@ export type PostActionsType = {
   fetchPost: (postId: string) => Promise<void>;
   addSelectedWork: (newWork: WorksType) => void;
   deleteSelectedWork: (workId: string) => void;
+  resetSelectedWork: () => void;
   selectAllCurrentPageWorks: (clickedAll: boolean) => void;
   setPage: (page: number) => void;
 };
@@ -44,6 +45,7 @@ export const createPostStore = (initState: PostStateType = defaultPost) => {
       set((state) => ({
         selectedWorks: state.selectedWorks.filter((work) => work.id !== workId),
       })),
+    resetSelectedWork: () => set(() => ({ selectedWorks: [] })),
     selectAllCurrentPageWorks: (clickedAll: boolean) => {
       const { post, selectedWorks, page } = get();
       const startIndex = (page - 1) * POST_LIST_PAGE_LIMIT;

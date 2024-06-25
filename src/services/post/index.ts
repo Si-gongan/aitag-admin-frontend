@@ -18,5 +18,5 @@ export async function deleteWork(postId: string, workIds: string[]) {
   };
 
   const response = await fetcher(requesrUrl, 'POST', option);
-  return response.result;
+  return response.result.post;
 }

@@ -8,10 +8,11 @@ import { deleteWork } from '@/services/post';
 export default function DelExportButtons() {
   const [clickedAll, setClickedAll] = useState(false);
 
-  const { postId, selectedWorks, selectAllCurrentPageWorks, fetchPost } = usePostStore((state) => ({
+  const { postId, selectedWorks, selectAllCurrentPageWorks, resetSelectedWork, fetchPost } = usePostStore((state) => ({
     postId: state.postId,
     selectedWorks: state.selectedWorks,
     selectAllCurrentPageWorks: state.selectAllCurrentPageWorks,
+    resetSelectedWork: state.resetSelectedWork,
     fetchPost: state.fetchPost,
   }));
 
@@ -20,12 +21,13 @@ export default function DelExportButtons() {
     setClickedAll((prev) => !prev);
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (selectedWorks.length === 0) return;
 
     const deleteIds = selectedWorks.map((work) => work.id);
-    deleteWork(postId, deleteIds);
-    fetchPost(postId);
+    await deleteWork(postId, deleteIds);
+    await fetchPost(postId);
+    resetSelectedWork();
   };
 
   const handleExport = () => {
