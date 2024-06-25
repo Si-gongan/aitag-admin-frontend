@@ -2,12 +2,20 @@
 
 import { useState } from 'react';
 import Button from '../common/Button';
+import { usePostStore } from '@/providers/post-store-provider';
 
 export default function DelExportButtons() {
-  const [selectedAll, setSelectedAll] = useState(false);
+  const [clickedAll, setClickedAll] = useState(false);
+
+  const { selectAllCurrentPageWorks } = usePostStore((state) => ({
+    post: state.post,
+    selectedWorks: state.selectedWorks,
+    selectAllCurrentPageWorks: state.selectAllCurrentPageWorks,
+  }));
 
   const handleSelectAll = () => {
-    setSelectedAll((prev) => !prev);
+    selectAllCurrentPageWorks(clickedAll);
+    setClickedAll((prev) => !prev);
   };
 
   const handleDelete = () => {
@@ -20,7 +28,7 @@ export default function DelExportButtons() {
 
   return (
     <div className="flex items-center gap-30">
-      <Button text="전체선택" size="large" clicked={selectedAll} selectable={true} handleClick={handleSelectAll} />
+      <Button text="전체선택" size="large" clicked={clickedAll} selectable={true} handleClick={handleSelectAll} />
       <Button text="삭제" size="large" handleClick={handleDelete} />
       <Button text="내보내기" size="large" handleClick={handleExport} />
     </div>

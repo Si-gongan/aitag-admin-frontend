@@ -1,22 +1,21 @@
-import { WorksType } from '@/services/post/schema';
+'use client';
+
+import { POST_LIST_PAGE_LIMIT } from '@/utils/constants';
 import PostItem from './PostItem';
+import { usePostStore } from '@/providers/post-store-provider';
 
-interface PostListSectionProps {
-  works: WorksType[];
-}
+export default function PostListSection() {
+  const { post, page } = usePostStore((state) => state);
 
-export default function PostListSection({ works }: PostListSectionProps) {
-  const page = 1;
-  const startIndex = (page - 1) * 9 + 1;
-  const indexArray = Array.from({ length: 9 }, (_, index) => startIndex + index);
+  const startIndex = (page - 1) * POST_LIST_PAGE_LIMIT;
+  const indexArray = Array.from({ length: POST_LIST_PAGE_LIMIT }, (_, index) => startIndex + index);
 
   return (
     <section className="flex flex-wrap gap-x-46 gap-y-44">
-      {indexArray.map((index) => works[index] && <PostItem key={works[index].id} work={works[index]} />)}
-      {/* {works.map((work, index) => (
-
-        <PostItem key={work.id} work={work} />
-      ))} */}
+      {indexArray.map(
+        (index) =>
+          post?.works[index] && <PostItem key={post?.works[index].id} work={post?.works[index]} target={post?.target} />
+      )}
     </section>
   );
 }
