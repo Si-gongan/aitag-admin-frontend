@@ -3,14 +3,16 @@
 import { useState } from 'react';
 import Button from '../common/Button';
 import { usePostStore } from '@/providers/post-store-provider';
+import { deleteWork } from '@/services/post';
 
 export default function DelExportButtons() {
   const [clickedAll, setClickedAll] = useState(false);
 
-  const { selectAllCurrentPageWorks } = usePostStore((state) => ({
-    post: state.post,
+  const { postId, selectedWorks, selectAllCurrentPageWorks, fetchPost } = usePostStore((state) => ({
+    postId: state.postId,
     selectedWorks: state.selectedWorks,
     selectAllCurrentPageWorks: state.selectAllCurrentPageWorks,
+    fetchPost: state.fetchPost,
   }));
 
   const handleSelectAll = () => {
@@ -19,7 +21,11 @@ export default function DelExportButtons() {
   };
 
   const handleDelete = () => {
-    console.log('');
+    if (selectedWorks.length === 0) return;
+
+    const deleteIds = selectedWorks.map((work) => work.id);
+    deleteWork(postId, deleteIds);
+    fetchPost(postId);
   };
 
   const handleExport = () => {

@@ -8,3 +8,15 @@ export async function getPostDetail(postId: string) {
   const response = await fetcher(requesrUrl, 'GET');
   return response.result.post;
 }
+
+/**의뢰 정보 중 work 삭제 요청 */
+export async function deleteWork(postId: string, workIds: string[]) {
+  const requesrUrl = `${API_ROUTE.POST_DETAIL(postId)}`;
+
+  const option = {
+    body: JSON.stringify({ workIds }),
+  };
+
+  const response = await fetcher(requesrUrl, 'POST', option);
+  return response.result;
+}
