@@ -33,7 +33,7 @@ export default function TargetButtons() {
           key={targetItem.value}
           text={targetItem.text}
           clicked={targetItem.value === state}
-          handleClick={() => handleChangeState(targetItem.value as TargetType)}
+          onClick={() => handleChangeState(targetItem.value as TargetType)}
         />
       ))}
     </div>

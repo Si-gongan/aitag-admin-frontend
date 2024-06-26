@@ -9,6 +9,7 @@ export type PostStateType = {
   post: getPostDetailType | null;
   selectedWorks: WorksType[];
   page: number;
+  editWork: WorksType | null;
 };
 
 export type PostActionsType = {
@@ -20,6 +21,7 @@ export type PostActionsType = {
   resetSelectedWork: () => void;
   selectAllCurrentPageWorks: (clickedAll: boolean) => void;
   setPage: (page: number) => void;
+  setEditWork: (editWork: WorksType) => void;
 };
 
 export type CreatePostStoreType = PostStateType & PostActionsType;
@@ -30,6 +32,7 @@ export const defaultPost: PostStateType = {
   post: null,
   selectedWorks: [],
   page: 1,
+  editWork: null,
 };
 
 export const createPostStore = (initState: PostStateType = defaultPost) => {
@@ -79,5 +82,6 @@ export const createPostStore = (initState: PostStateType = defaultPost) => {
       set({ selectedWorks: newSelectedWorks });
     },
     setPage: (page: number) => set(() => ({ page })),
+    setEditWork: (editWork: WorksType) => set(() => ({ editWork })),
   }));
 };

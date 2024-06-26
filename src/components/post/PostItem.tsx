@@ -6,6 +6,8 @@ import Image from 'next/image';
 import Button from '../common/Button';
 import { useEffect, useState } from 'react';
 import { usePostStore } from '@/providers/post-store-provider';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface PostItemProps {
   work: WorksType;
@@ -15,11 +17,15 @@ export default function PostItem({ work }: PostItemProps) {
   const [checked, setChecked] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
 
-  const { post, selectedWorks, addSelectedWork, deleteSelectedWork } = usePostStore((state) => ({
+  const router = useRouter();
+
+  const { postId, post, selectedWorks, addSelectedWork, deleteSelectedWork, setEditWork } = usePostStore((state) => ({
+    postId: state.postId,
     post: state.post,
     selectedWorks: state.selectedWorks,
     addSelectedWork: state.addSelectedWork,
     deleteSelectedWork: state.deleteSelectedWork,
+    setEditWork: state.setEditWork,
   }));
 
   const isInspect = post && post.target === undefined;
@@ -39,6 +45,11 @@ export default function PostItem({ work }: PostItemProps) {
     } else deleteSelectedWork(work.id);
   };
 
+  const handleEdit = () => {
+    setEditWork(work);
+    router.push(`/post/${postId}/edit`);
+  };
+
   useEffect(() => {
     const isWorkSelected = selectedWorks.some((selectedWork) => selectedWork.id === work.id);
     setChecked(isWorkSelected);
@@ -51,7 +62,7 @@ export default function PostItem({ work }: PostItemProps) {
         <Image
           src={thumbnail}
           alt={`${work.id}의 썸네일`}
-          sizes="100vw"
+          sizes="30vw"
           fill
           placeholder="blur"
           blurDataURL="/images/default-thumbnail.png"
@@ -60,7 +71,9 @@ export default function PostItem({ work }: PostItemProps) {
       <div className="flex flex-col items-end">
         <p className="w-292 h-48 text-13 leading-16 line-clamp-3">{answerText}</p>
         {post && post.target !== 'ai' && (
-          <Button text={buttonText} size="small" handleClick={() => setEditModalOpen(true)} />
+          // <Link href={`/post/${post.id}/edit`}>
+          <Button text={buttonText} size="small" onClick={handleEdit} />
+          // </Link>
         )}
       </div>
     </section>

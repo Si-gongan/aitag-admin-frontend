@@ -35,6 +35,7 @@ module.exports = {
         },
         black: '#000',
         white: '#FFF',
+        overlay: 'rgba(0, 0, 0, 0.6)',
       },
       zIndex: {
         DEFAULT: '1',

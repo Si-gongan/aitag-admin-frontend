@@ -5,7 +5,10 @@ import PostItem from './PostItem';
 import { usePostStore } from '@/providers/post-store-provider';
 
 export default function PostListSection() {
-  const { post, page } = usePostStore((state) => state);
+  const { post, page } = usePostStore((state) => ({
+    post: state.post,
+    page: state.page,
+  }));
 
   const startIndex = (page - 1) * POST_LIST_PAGE_LIMIT;
   const indexArray = Array.from({ length: POST_LIST_PAGE_LIMIT }, (_, index) => startIndex + index);
