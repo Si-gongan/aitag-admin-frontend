@@ -25,8 +25,8 @@ export default function PostItem({ work }: PostItemProps) {
   }));
 
   const isInspect = post && post.target === undefined;
-  const answerText = isInspect ? work.after || '' : work.answer || '없음';
-  const buttonText = isInspect === undefined ? '작성' : '수정';
+  const answerText = isInspect ? work.after || '없음' : work.answer || '';
+  const buttonText = isInspect ? '수정' : '작성';
 
   const thumbnail =
     typeof work.image === 'string' && work.image.startsWith('https://gongbang-v2')
