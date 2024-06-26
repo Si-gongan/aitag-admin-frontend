@@ -1,21 +1,19 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 interface ModalLayoutProps {
   children: React.ReactNode;
+  onClose: () => void;
 }
 
-export default function ModalLayout({ children }: ModalLayoutProps) {
+export default function ModalLayout({ children, onClose }: ModalLayoutProps) {
   const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
-
-  const router = useRouter();
 
   const handleClose = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
-      router.back();
+      onClose();
     }
   };
 

@@ -6,8 +6,7 @@ import Textarea from '../common/Textarea';
 import React, { useState } from 'react';
 
 export default function EditContent() {
-  const { postId, editWork, setEditWork } = usePostStore((state) => ({
-    postId: state.postId,
+  const { editWork, setEditWork } = usePostStore((state) => ({
     editWork: state.editWork,
     setEditWork: state.setEditWork,
   }));
