@@ -42,7 +42,7 @@ export default function SortButtons<T extends StateType | TargetType>({ type, bu
           key={button.value}
           text={button.text}
           clicked={button.value === currentValue}
-          handleClick={() => handleChange(button.value)}
+          onClick={() => handleChange(button.value)}
         />
       ))}
     </div>

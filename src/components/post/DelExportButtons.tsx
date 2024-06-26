@@ -36,9 +36,9 @@ export default function DelExportButtons() {
 
   return (
     <div className="flex items-center gap-30">
-      <Button text="전체선택" size="large" clicked={clickedAll} selectable={true} handleClick={handleSelectAll} />
-      <Button text="삭제" size="large" handleClick={handleDelete} />
-      <Button text="내보내기" size="large" handleClick={handleExport} />
+      <Button text="전체선택" size="large" clicked={clickedAll} selectable={true} onClick={handleSelectAll} />
+      <Button text="삭제" size="large" onClick={handleDelete} />
+      <Button text="내보내기" size="large" onClick={handleExport} />
     </div>
   );
 }

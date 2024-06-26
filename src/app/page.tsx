@@ -3,6 +3,7 @@ import MainPagination from '@/components/main/MainPagination';
 import SortButtons from '@/components/main/SortButtons';
 import { getData } from '@/services/main';
 import { STATE_BUTTONS, TARGET_BUTTONS } from '@/utils/constants';
+import './globals.css';
 
 export default async function MainPage() {
   const response = await getData({ target: 'all', state: 'all' });

@@ -16,3 +16,7 @@ export const TARGET_BUTTONS: Array<{ value: TargetType; text: string }> = [
 export const MAIN_DATA_LIMIT = '14';
 
 export const POST_LIST_PAGE_LIMIT = 9;
+
+export const TEXTAREA_LIMIT = {
+  postIdEdit: 500,
+};

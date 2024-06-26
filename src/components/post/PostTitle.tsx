@@ -10,7 +10,12 @@ interface PostTitleProps {
 
 export default function PostTitle({ postId }: PostTitleProps) {
   const pathname = useGetPathname();
-  const { setPostId, fetchPost, post, setPathname } = usePostStore((state) => state);
+  const { setPostId, fetchPost, post, setPathname } = usePostStore((state) => ({
+    setPostId: state.setPostId,
+    fetchPost: state.fetchPost,
+    post: state.post,
+    setPathname: state.setPathname,
+  }));
 
   useEffect(() => {
     setPostId(postId);
