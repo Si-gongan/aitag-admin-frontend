@@ -29,7 +29,7 @@ export async function getInspectDetail(inspectId: string) {
   return response.result.inspect;
 }
 
-/**work.answer 수정 요청 */
+/**comment의 work.answer 수정 요청 */
 export async function patchComment(postId: string, workId: string, answer: string) {
   const requesrUrl = `${API_ROUTE.POST_DETAIL(postId)}`;
 
@@ -39,4 +39,16 @@ export async function patchComment(postId: string, workId: string, answer: strin
 
   const response = await fetcher(requesrUrl, 'PATCH', option);
   return response.result.post;
+}
+
+/**inspect의 work.after 수정 요청 */
+export async function patchInspect(inspectId: string, workId: string, answer: string) {
+  const requesrUrl = `${API_ROUTE.INSPCET_DETAIL(inspectId)}`;
+
+  const option = {
+    body: JSON.stringify({ workId, answer }),
+  };
+
+  const response = await fetcher(requesrUrl, 'PATCH', option);
+  return response.result.inspect;
 }

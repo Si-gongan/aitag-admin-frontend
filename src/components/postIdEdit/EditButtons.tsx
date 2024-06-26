@@ -2,14 +2,15 @@
 
 import { usePostStore } from '@/providers/post-store-provider';
 import Button from '../common/Button';
-import { patchComment } from '@/services/post';
+import { patchComment, patchInspect } from '@/services/post';
 
 interface EditButtonsProps {
   onClose: () => void;
 }
 
 export default function EditButtons({ onClose }: EditButtonsProps) {
-  const { postId, editWork, fetchPost } = usePostStore((state) => ({
+  const { post, postId, editWork, fetchPost } = usePostStore((state) => ({
+    post: state.post,
     postId: state.postId,
     editWork: state.editWork,
     fetchPost: state.fetchPost,
@@ -18,7 +19,11 @@ export default function EditButtons({ onClose }: EditButtonsProps) {
   const handleSubmit = async () => {
     if (!editWork?.answer) return;
 
-    const response = await patchComment(postId, editWork?.id, editWork?.answer);
+    if (post?.target === undefined) {
+      const response = await patchInspect(postId, editWork?.id, editWork?.answer);
+    } else {
+      const response = await patchComment(postId, editWork?.id, editWork?.answer);
+    }
 
     fetchPost(postId);
     onClose();
