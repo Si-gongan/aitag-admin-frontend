@@ -2,11 +2,15 @@ import ModalLayout from '@/components/common/ModalLayout';
 import EditButtons from '@/components/postIdEdit/EditButtons';
 import EditContent from '@/components/postIdEdit/EditContent';
 
-export default function PostIdEditPage() {
+interface WorkEditModalProps {
+  onClose: () => void;
+}
+
+export default function WorkEditModal({ onClose }: WorkEditModalProps) {
   return (
-    <ModalLayout>
+    <ModalLayout onClose={onClose}>
       <EditContent />
-      <EditButtons />
+      <EditButtons onClose={onClose} />
     </ModalLayout>
   );
 }

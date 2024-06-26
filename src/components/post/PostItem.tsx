@@ -1,13 +1,12 @@
 'use client';
 
-import { PostTargetType, WorksType } from '@/services/post/schema';
+import { WorksType } from '@/services/post/schema';
 import CheckBox from '../common/CheckBox';
 import Image from 'next/image';
 import Button from '../common/Button';
 import { useEffect, useState } from 'react';
 import { usePostStore } from '@/providers/post-store-provider';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import WorkEditModal from '../postIdEdit/WorkEditModal';
 
 interface PostItemProps {
   work: WorksType;
@@ -17,10 +16,7 @@ export default function PostItem({ work }: PostItemProps) {
   const [checked, setChecked] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
 
-  const router = useRouter();
-
-  const { postId, post, selectedWorks, addSelectedWork, deleteSelectedWork, setEditWork } = usePostStore((state) => ({
-    postId: state.postId,
+  const { post, selectedWorks, addSelectedWork, deleteSelectedWork, setEditWork } = usePostStore((state) => ({
     post: state.post,
     selectedWorks: state.selectedWorks,
     addSelectedWork: state.addSelectedWork,
@@ -47,7 +43,7 @@ export default function PostItem({ work }: PostItemProps) {
 
   const handleEdit = () => {
     setEditWork(work);
-    router.push(`/post/${postId}/edit`);
+    setEditModalOpen(true);
   };
 
   useEffect(() => {
@@ -70,12 +66,9 @@ export default function PostItem({ work }: PostItemProps) {
       </div>
       <div className="flex flex-col items-end">
         <p className="w-292 h-48 text-13 leading-16 line-clamp-3">{answerText}</p>
-        {post && post.target !== 'ai' && (
-          // <Link href={`/post/${post.id}/edit`}>
-          <Button text={buttonText} size="small" onClick={handleEdit} />
-          // </Link>
-        )}
+        {post && post.target !== 'ai' && <Button text={buttonText} size="small" onClick={handleEdit} />}
       </div>
+      {editModalOpen && <WorkEditModal onClose={() => setEditModalOpen(false)} />}
     </section>
   );
 }
