@@ -14,13 +14,6 @@ export async function getData(params: getDataParamsType) {
 
   if (params.search) requestParams.set('search', params.search);
 
-  // const optionalParams = ['search'];
-  // optionalParams.forEach((param) => {
-  //   if (params[param]) {
-  //     requestParams.set(param, params[param] as string);
-  //   }
-  // });
-
   const requestUrl = `${API_ROUTE.GET_DATA(requestParams.toString())}`;
 
   const response = await fetcher(requestUrl, 'GET');
