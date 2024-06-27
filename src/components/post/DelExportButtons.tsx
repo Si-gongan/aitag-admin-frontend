@@ -4,9 +4,12 @@ import { useState } from 'react';
 import Button from '../common/Button';
 import { usePostStore } from '@/providers/post-store-provider';
 import { deleteWork } from '@/services/post';
+import ModalLayout from '../common/ModalLayout';
+import ExportDropdown from './ExportDropdown';
 
 export default function DelExportButtons() {
   const [clickedAll, setClickedAll] = useState(false);
+  const [exportDropdownOpen, setExportDropdownOpen] = useState(false);
 
   const { postId, selectedWorks, selectAllCurrentPageWorks, resetSelectedWork, fetchPost } = usePostStore((state) => ({
     postId: state.postId,
@@ -35,10 +38,11 @@ export default function DelExportButtons() {
   };
 
   return (
-    <div className="flex items-center gap-30">
+    <div className="relative flex items-center gap-30">
       <Button text="전체선택" size="large" clicked={clickedAll} selectable={true} onClick={handleSelectAll} />
       <Button text="삭제" size="large" onClick={handleDelete} />
-      <Button text="내보내기" size="large" onClick={handleExport} />
+      <Button text="내보내기" size="large" onClick={() => setExportDropdownOpen(true)} />
+      {exportDropdownOpen && <ExportDropdown onClose={() => setExportDropdownOpen(false)} />}
     </div>
   );
 }
