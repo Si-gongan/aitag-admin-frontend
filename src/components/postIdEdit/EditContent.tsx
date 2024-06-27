@@ -33,12 +33,11 @@ export default function EditContent() {
   return (
     <div className="flex flex-col gap-28 w-full text-20">
       <div className="flex gap-25">
-        <div className="w-300 h-300 overflow-hidden">
+        <div className="relative w-300 h-300 overflow-hidden">
           <Image
             src={thumbnail}
             alt={`work ${editWork?.id}의 썸네일 이미지`}
-            width={300}
-            height={300}
+            fill
             sizes="50vw"
             style={{ objectFit: 'cover' }}
             placeholder="blur"

@@ -20,3 +20,11 @@ export const POST_LIST_PAGE_LIMIT = 9;
 export const TEXTAREA_LIMIT = {
   postIdEdit: 500,
 };
+
+export const EXPORT_FORMAT = ['CSV', 'JSON', 'TXT'];
+
+// export const EXPORT_SORT = [
+//   { id: 'csv', name: 'CSV' },
+//   { id: 'json', name: 'JSON' },
+//   { id: 'txt', name: 'TXT' },
+// ];
