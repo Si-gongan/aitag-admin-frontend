@@ -19,7 +19,15 @@ export default function ListItem({ item }: ListItemProps) {
   return (
     <section className="flex flex-col gap-14 w-224 h-245 p-14 bg-gray-100">
       <div className="relative w-196 h-147 overflow-hidden">
-        <Image src={thumbnail} alt={`${item.id}의 썸네일 이미지`} fill sizes="196px" style={{ objectFit: 'cover' }} />
+        <Image
+          src={thumbnail}
+          alt={`${item.id}의 썸네일 이미지`}
+          fill
+          sizes="196px"
+          style={{ objectFit: 'cover' }}
+          placeholder="blur"
+          blurDataURL="/images/default-thumbnail.png"
+        />
       </div>
       <h3 className="text-14 font-medium">{item.title}</h3>
       <div className="flex justify-between w-full">
