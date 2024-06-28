@@ -16,7 +16,7 @@ export default async function MainPage() {
         <hr className="h-38 border-1" />
         <SortButtons type="target" buttons={TARGET_BUTTONS} />
       </section>
-      <ListSection />
+      <ListSection initialData={response.data} />
       <MainPagination />
     </main>
   );

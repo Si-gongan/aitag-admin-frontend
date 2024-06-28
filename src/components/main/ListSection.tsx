@@ -5,13 +5,21 @@ import { useMainStore } from '@/providers/main-store-provider';
 import { useEffect } from 'react';
 import Link from 'next/link';
 import { URL_PATH } from '@/utils/route';
+import { DataType } from '@/services/main/schema';
 
-export default function ListSection() {
-  const { datas, fetchDatas } = useMainStore((state) => ({ datas: state.datas, fetchDatas: state.fetchDatas }));
+interface ListSectionProps {
+  initialData: DataType[];
+}
+
+export default function ListSection({ initialData }: ListSectionProps) {
+  const { datas, setDatas } = useMainStore((state) => ({
+    datas: state.datas,
+    setDatas: state.setDatas,
+  }));
 
   useEffect(() => {
-    fetchDatas();
-  }, [fetchDatas]);
+    setDatas(initialData);
+  }, [setDatas, initialData]);
 
   return (
     <section className="flex flex-wrap gap-y-37 gap-x-66">
