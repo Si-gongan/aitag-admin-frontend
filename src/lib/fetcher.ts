@@ -13,7 +13,7 @@ export async function fetcher(endPoint: string, method: string, options?: any) {
       ...defaultHeaders,
       ...options?.headers,
     },
-    cache: 'no-store',
+    // cache: 'no-store', // build 에러 발생으로 주석처리
     ...options,
   };
 
