@@ -9,7 +9,7 @@ interface ListItemProps {
 }
 
 export default function ListItem({ item }: ListItemProps) {
-  const image = item.works[0].image;
+  const image = item.works[0]?.image || '/images/default-thumbnail.png';
   const thumbnail =
     typeof image === 'string' && image.startsWith('https://gongbang-v2') ? image : '/images/default-thumbnail.png';
 
