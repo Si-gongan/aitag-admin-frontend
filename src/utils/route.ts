@@ -1,6 +1,6 @@
 export const API_ROUTE = {
-  GET_DATA: (params: string) => `/data?${params}`,
-  POST_DETAIL: (postId: string) => `/post/detail/${postId}`,
+  GET_DATA: (params: string) => `admin/data?${params}`,
+  POST_DETAIL: (postId: string) => `admin/post/detail/${postId}`,
   INSPCET_DETAIL: (inspectId: string) => `/inspect/detail/${inspectId}`,
 };
 

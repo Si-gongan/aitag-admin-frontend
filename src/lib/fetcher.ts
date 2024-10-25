@@ -1,5 +1,5 @@
 export async function fetcher(endPoint: string, method: string, options?: any) {
-  const requestUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}${endPoint}`;
+  const requestUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${endPoint}`;
   const token = process.env.NEXT_PUBLIC_API_TOKEN;
 
   const defaultHeaders = {
