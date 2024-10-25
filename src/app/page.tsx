@@ -7,7 +7,6 @@ import './globals.css';
 
 export default async function MainPage() {
   const response = await getData({ target: 'all', state: 'all' });
-  // SEO
 
   return (
     <main className="w-1400 flex flex-col gap-60 mb-24">

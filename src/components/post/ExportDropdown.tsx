@@ -11,7 +11,7 @@ export default function ExportDropdown({ onClose }: ExportDropdownProps) {
   const { selectedWorks } = usePostStore((state) => ({ selectedWorks: state.selectedWorks }));
 
   const handleClickExport = (type: string) => {
-    exportData(type, selectedWorks);
+    exportData(selectedWorks);
     onClose();
   };
 
