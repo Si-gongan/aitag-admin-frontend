@@ -23,6 +23,10 @@
     -webkit-box-shadow: 0 0 0px 1000px #fff inset;
   }
 
+  textarea {
+    outline: none;
+  }
+
   .scroll-block::-webkit-scrollbar {
     display: block;
     height: 6px;
@@ -59,4 +63,16 @@
   background-image: url('../assets/intro-back-image.svg');
   background-size: cover;
   background-position: center;
+}
+
+.btn-small {
+  @apply w-65 h-28; /* 적절한 TailwindCSS 유틸리티 클래스를 사용하여 버튼 크기 설정 */
+}
+
+.btn-medium {
+  @apply w-108 h-40;
+}
+
+.btn-large {
+  @apply w-133 h-41;
 }
